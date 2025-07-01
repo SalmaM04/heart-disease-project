@@ -1,0 +1,13 @@
+"0","props <-prop.table(table(babies$smoke_f))
+props
+"
+"1","
+"
+"1","Mother does not smoke "
+"1","    Mother does smoke "
+"1","
+"
+"1","            0.6052202 "
+"1","            0.3947798 "
+"1","
+"

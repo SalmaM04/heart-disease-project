@@ -1,0 +1,306 @@
+---
+title: "secondDay"
+author: "Salma"
+date: "2024-07-02"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+install.packages("readr")
+
+library(readr)
+
+heart_disease_dataset <- read_csv("heart_disease_dataset.csv")
+
+heart_disease_dataset <- read_csv("heart_disease_dataset.numbers")
+
+library(openintro)
+
+data(babies)
+
+library(ggplot2)
+library(dplyr)
+
+ggplot(mtcars, aes(x=mpg)) +
+  geom_histogram(bins = 10, fill = "lightgreen", color = "black") + 
+  labs(
+    title = "Distribution of Miles Per Gallon",
+    x = "MPG",
+    y = "Frequency"
+  )
+
+```
+```{r}
+library(dplyr)
+ggplot(mtcars, aes(x = mpg, y = drat)) + 
+  # Aplha = opacity of each dot, size = size of each dot
+  geom_point(color = "pink", size = 2, alpha = 0.5) +
+  
+  # Add labels and title
+  labs(
+    title = "Scatterplot of .....",
+    x = "MPG",
+    y = "Rear Axle Ratio"
+  )
+```
+```{r}
+data(babies) #open intro data - no need to put qoutes
+
+dplyr::glimpse(babies) # glimpse of the dataset
+
+summary(babies) #view a summary of each column(variable)
+```
+```{r}
+babies$parity_f <- factor(babies$parity,
+  labels = c("First Pregnancy", "More than 1 Pregnancy"))
+  # r nows first label is for 0 and second label is for 1
+
+babies$smoke_f <- factor(babies$smoke,
+  label = c("Mother does not smoke", "Mother does smoke"))
+```
+
+```{r}
+library(ggplot2)
+
+library(dplyr)
+
+ggplot(babies, aes(x = height)) +
+  geom_histogram(bins = 10, fill = "purple", color = "black") +
+  labs(
+    title = "Distribution of height of mothers",
+    x = "height",
+    y = "Frequency"
+  )
+```
+```{r}
+# Partiy factor table
+pari <- prop.table(table(babies$parity_f))
+pari
+```
+```{r}
+props <-prop.table(table(babies$smoke_f))
+props
+```
+
+
+Linear Regression
+
+- Libear regression analysis is sued to predict the value of a variabel based on teh value of another variable. The v
+
+```{r}
+library(openintro)
+
+data(heart_disease_dataset)
+
+library(ggplot2)
+library(dplyr)
+
+ggplot(heart_disease_dataset, aes(x=Age)) +
+  geom_histogram(bins = 10, fill = "lightblue", color = "gray") + 
+  labs(
+    title = "Heart Disease Distribution",
+    x = "Age",
+    y = "Frequency"
+  )
+```
+```{r}
+library(dplyr)
+ggplot(heart_disease_dataset, aes(x = Age, y = BloodPressure)) + 
+  # Aplha = opacity of each dot, size = size of each dot
+  geom_point(color = "lightpink", size = 2, alpha = 0.5) +
+  
+  # Add labels and title
+  labs(
+    title = "Scatterplot of .....",
+    x = "Smoking",
+    y = "Blood Pressire"
+  )
+```
+```{r}
+data(heart_disease_dataset) #open intro data - no need to put qoutes
+
+dplyr::glimpse(heart_disease_dataset) # glimpse of the dataset
+
+summary(heart_disease_dataset) #view a summary of each column(variable)
+```
+```{r}
+
+
+heart_disease_dataset$previous <-  factor(heart_disease_dataset$`Heart Disease`,
+    labels = c("No", "Yes"))
+  
+```
+
+
+```{r}
+# Partiy factor table
+#hearDis <- prop.table(table(_______$`Heart Disease`_f))
+#hearDis
+```
+
+```{r}
+#assignment and lm means linear mode
+#amount is age, x is data
+# lm(y ~ x, data = datasetname)
+model <- lm(BloodPressure ~ Cholesterol, data = heart_disease_dataset)
+library(ggfortify)
+autoplot(model)
+
+summary(model)
+```
+
+LINEARITY
+```{r}
+
+ggplot(heart_disease_dataset, aes(x = Cholesterol, y = BloodPressure)) +
+  geom_point() +
+  geom_smooth(method = 'lm', se = F) +
+  labs(title = "Scatterplot of Blood Pressure vs. Cholesterol", 
+       x = "Patient Cholesterol Level (mg/dL)",
+       y = "Blood Pressure (mmHg)") + 
+  theme_classic()
+  
+```
+Normality
+
+```{r}
+
+qqnorm(resid(model))
+qqline(resid(model), col = "purple")
+```
+E - "Equal" (Constant) Variance
+
+```{r}
+
+plot(resid(model) ~ fitted(model))
+abline(h = 0, col = "purple")
+```
+Independence:
+
+This dataset was generated using Python therefore the patient's data are independent of other observations. Synthetic data was created to simulate risk factors and symptoms associated with heart disease.
+
+This dataset was generated using Python programming language with the NumPy library. Synthetic data was created to simulate risk factors and symptoms associated with heart disease. The dataset was generated for the purpose of conducting exploratory data analysis (EDA) and developing machine learning models for heart disease prediction.
+
+```{r}
+library(dplyr)
+
+heart_disease_dataset <- heart_disease_dataset %>% rename(BloodPressure = `BP`)
+
+
+```
+Bar Chart - frequency of chest pain types
+```{r}
+# prep frequency table
+freqtable <- table(heart_disease_dataset$ChestPainType)
+df <- as.data.frame.table(freqtable)
+head(df)
+
+# plot
+library(ggplot2)
+theme_set(theme_classic())
+
+# Plot
+g <- ggplot(df, aes(Var1, Freq))
+g + geom_bar(stat="identity", width = 0.5, fill="tomato2") + 
+      labs(title="Bar Chart", 
+          # subtitle="Manufacturer of vehicles", 
+           caption="Source: Frequencey of Chest Pain Types of Patients from 'Heart Disease' dataset") +
+      theme(axis.text.x = element_text(angle=65, vjust=0.6))
+```
+Pie Chart - Alcohol intake
+```{r}
+library(ggplot2)
+theme_set(theme_classic())
+
+# Source: Frequency table
+df <- as.data.frame(table(heart_disease_dataset$AlcoholIntake))
+colnames(df) <- c("alcohol_intake", "freq")
+pie <- ggplot(df, aes(x = "", y=freq, fill = factor(alcohol_intake))) + 
+  geom_bar(width = 1, stat = "identity") +
+  theme(axis.line = element_blank(), 
+        plot.title = element_text(hjust=0.5)) + 
+  labs(fill="alcohol intake", 
+       x=NULL, 
+       y=NULL, 
+       title="Pie Chart of Alcohol Intake", 
+       caption="Source: 'Heart Disease Dataset")
+
+pie + coord_polar(theta = "y", start=0)
+
+# Source: Categorical variable.
+# heart_disease_dataset$AlcoholIntake
+pie <- ggplot(heart_disease_dataset, aes(x = "", fill = factor(AlcoholIntake))) + 
+  geom_bar(width = 1) +
+  theme(axis.line = element_blank(), 
+        plot.title = element_text(hjust=0.5)) + 
+  labs(fill="alcohol intake", 
+       x=NULL, 
+       y=NULL, 
+       title="Pie Chart of Alcohol Intake", 
+       caption="Source: 'Heart Disease Dataset'")
+  
+pie + coord_polar(theta = "y", start=0)
+```
+Density Plot
+```{r}
+library(ggplot2)
+theme_set(theme_classic())
+
+# Plot
+g <- ggplot(heart_disease_dataset, aes(Smoking, StressLevel))
+g + geom_boxplot(varwidth=T, fill="plum") + 
+    labs(title="Box plot", 
+         subtitle="Smoking History grouped by Stress Levels",
+         caption="Source: Heart Disease Dataset",
+         x="Smoking History",
+         y="Stress Levels")
+```
+Density Plot - Chest Pain Type and Blood Pressure
+```{r}
+library(ggplot2)
+theme_set(theme_classic())
+
+# Plot
+g <- ggplot(heart_disease_dataset, aes(ChestPainType, BloodPressure))
+g + geom_boxplot(varwidth=T, fill="lightgreen") + 
+    labs(title="Box plot", 
+         subtitle="Chest Pain Type grouped by Blood Pressure",
+         caption="Source: Heart Disease Dataset",
+         x="Chest Pain Type",
+         y="Blood Pressure")
+```
+Angina is pain in the chest that comes on with exercise, stress, etc that make the heart work harder.
+
+Box Plot - Exercise and Exercise Induced Angina
+```{r}
+library(ggplot2)
+theme_set(theme_classic())
+
+# Plot
+g <- ggplot(heart_disease_dataset, aes(ExerciseInducedAngina, ExerciseHours))
+g + geom_boxplot(varwidth=T, fill="lightblue") + 
+    labs(title="Box plot", 
+         subtitle="Exercise Induced Angina History grouped by Exercise Hours",
+         caption="Source: Heart Disease Dataset",
+         x="Exercise Induced Angina",
+         y="Exercise Hours")
+```
+Box Plot - Stress Levels and Exercise Induced Angina
+```{r}
+library(ggplot2)
+theme_set(theme_classic())
+
+# Plot
+g <- ggplot(heart_disease_dataset, aes(ExerciseInducedAngina, StressLevel))
+g + geom_boxplot(varwidth=T, fill="pink") + 
+    labs(title="Box plot", 
+         subtitle="Exercise Induced Angina History grouped by Stress Levels",
+         caption="Source: Heart Disease Dataset",
+         x="Exercise Induced Angina",
+         y="Stress Level")
+```

@@ -1,0 +1,6 @@
+"0","heart_disease_dataset <- read_csv(""heart_disease_dataset.numbers"")
+"
+"2","Multiple files in zip: reading 'Index/Document.iwa'"
+"2","Error in vroom_(file, delim = delim %||% col_types$delim, col_names = col_names,  : 
+  embedded nul in string: '\xbf\032\0\xbb\\\xf0e8\b\001\0224\b\001\022\003\001\0\005\030\xb3\v""\v'
+"

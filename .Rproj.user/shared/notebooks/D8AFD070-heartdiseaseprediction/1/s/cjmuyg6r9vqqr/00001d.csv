@@ -1,0 +1,6 @@
+"0","#assignment and lm means linear mode"
+"0","#amount is age, x is data"
+"0","# lm(y ~ x, data = datasetname)"
+"0","model <- lm(BloodPressure ~ Cholesterol, data = heart_disease_dataset)"
+"0","library(ggfortify)"
+"0","autoplot(model)"

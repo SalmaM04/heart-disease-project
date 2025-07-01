@@ -1,0 +1,14 @@
+"0","# Partiy factor table
+pari <- prop.table(table(babies$parity_f))
+pari
+"
+"1","
+"
+"1","      First Pregnancy "
+"1","More than 1 Pregnancy "
+"1","
+"
+"1","            0.7451456 "
+"1","            0.2548544 "
+"1","
+"

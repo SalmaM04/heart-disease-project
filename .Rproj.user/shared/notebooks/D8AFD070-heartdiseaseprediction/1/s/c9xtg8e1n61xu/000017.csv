@@ -1,0 +1,8 @@
+"0",""
+"0","ggplot(heart_disease_dataset, aes(x = Cholesterol, y = BloodPressure)) +"
+"0","  geom_point() +"
+"0","  geom_smooth(method = 'lm', se = F) +"
+"0","  labs(title = ""Scatterplot of Blood Pressure vs. Cholesterol"", "
+"0","       x = ""Patient Cholesterol Level (mg/dL)"","
+"0","       y = ""Blood Pressure (mmHg)"") + "
+"0","  theme_classic()"

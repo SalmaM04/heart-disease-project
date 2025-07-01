@@ -1,0 +1,4 @@
+"0","# prep frequency table"
+"0","freqtable <- table(heart_disease_dataset$ChestPainType)"
+"0","df <- as.data.frame.table(freqtable)"
+"0","head(df)"
