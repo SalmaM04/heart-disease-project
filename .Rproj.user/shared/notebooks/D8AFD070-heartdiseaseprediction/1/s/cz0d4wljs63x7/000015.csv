@@ -1,5 +1,0 @@
-"0",""
-"0",""
-"0","heart_disease_dataset$previous <-  factor(heart_disease_dataset$`Heart Disease`,"
-"0","    labels = c(""No"", ""Yes""))"
-"0","  "
