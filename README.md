@@ -1,5 +1,7 @@
 # 🫀 Heart Disease Risk: Exploring Cholesterol & Blood Pressure
 
+![Research Poster](heartdiseaseposter.png)
+
 This project explores the relationship between **cholesterol levels** and **blood pressure** using a synthetic heart disease dataset. We applied **simple linear regression** and data visualization techniques in R to test whether cholesterol is a significant predictor of blood pressure — a known risk factor for heart disease.
 
 ## 📊 Summary
